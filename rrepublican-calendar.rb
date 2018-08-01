@@ -3,7 +3,7 @@ require 'date'
 module RRepublicanCalendar
   def to_republican
     Date::Republican.from_days(
-      self - Date::Republican::DAY_ONE_DATE
+      self - Date::Republican::FRENCH_REPUBLICAN_EPOCH
     )
   end
 end
@@ -11,8 +11,7 @@ end
 class Date::Republican
   attr_accessor :year, :month, :day
 
-  FRENCH_REPUBLIC = 2375840
-  DAY_ONE_DATE = Date.jd(FRENCH_REPUBLIC)
+  FRENCH_REPUBLICAN_EPOCH = Date.jd(2375840)
 
   def initialize(year = 1, month = 1, day = 1)
     @day = day
@@ -50,7 +49,7 @@ class Date::Republican
   end
 
   def to_gregorian
-    DAY_ONE_DATE + to_days
+    FRENCH_REPUBLICAN_EPOCH + to_days
   end
 end
 
