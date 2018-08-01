@@ -1,13 +1,5 @@
 require 'date'
 
-module RRepublicanCalendar
-  def to_republican
-    FrenchRepublicanDate.from_days(
-      self - FrenchRepublicanDate::FRENCH_REPUBLICAN_EPOCH
-    )
-  end
-end
-
 class FrenchRepublicanDate
   attr_accessor :year, :month, :day
 
@@ -54,5 +46,9 @@ class FrenchRepublicanDate
 end
 
 Date.class_eval do
-  include RRepublicanCalendar
+  def to_republican
+    FrenchRepublicanDate.from_days(
+      self - FrenchRepublicanDate::FRENCH_REPUBLICAN_EPOCH
+    )
+  end
 end
