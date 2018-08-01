@@ -2,13 +2,13 @@ require 'date'
 
 module RRepublicanCalendar
   def to_republican
-    Date::Republican.from_days(
-      self - Date::Republican::FRENCH_REPUBLICAN_EPOCH
+    FrenchRepublicanDate.from_days(
+      self - FrenchRepublicanDate::FRENCH_REPUBLICAN_EPOCH
     )
   end
 end
 
-class Date::Republican
+class FrenchRepublicanDate
   attr_accessor :year, :month, :day
 
   FRENCH_REPUBLICAN_EPOCH = Date.jd(2375840)
@@ -38,14 +38,14 @@ class Date::Republican
   def to_days
     days = 0
     (1..(year - 1)).each do |y|
-      days += Date::Republican.sextil?(y) ? 366 : 365
+      days += FrenchRepublicanDate.sextil?(y) ? 366 : 365
     end
     days += (month - 1) * 30
     days += day - 1
   end
 
   def sextil?
-    Date::Republican.sextil?(year)
+    FrenchRepublicanDate.sextil?(year)
   end
 
   def to_gregorian
